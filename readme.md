@@ -11,12 +11,12 @@
 创建型模式是为了解决创建对象时候遇到的问题。因为基本的对象创建方式可能会导致设计上的问题，或增加设计的复杂度，创建型设计模式有两个主导思想：**一是将系统使用的具体类封装起来，二是隐藏这些具体类的实例创建和结合方式。**
 #### 创建型模式主要有以下五种：
 
-    1. [简单工厂模式（Simple Factory）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%20%EF%BC%88Simple%20Factory%EF%BC%89.md)
-    2. 工厂方法模式（Factory method）
-    3. 抽象工厂模式（Abstract factory）
-    4. 单例模式（Singleton）
-    5. 建造者模式（Builder）
-    6. 原型模式（Prototype） 
+1. [简单工厂模式（Simple Factory）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%20%EF%BC%88Simple%20Factory%EF%BC%89.md)
+2. 工厂方法模式（Factory method）
+3. 抽象工厂模式（Abstract factory）
+4. 单例模式（Singleton）
+5. 建造者模式（Builder）
+6. 原型模式（Prototype） 
 
 GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。将简单工厂模式（Simple Factory）看为工厂方法模式的一种特例，两者归为一类。
 
