@@ -96,7 +96,7 @@
     }
 ```
 
-##### 客户：
+#####客户：
 
 ```php
  $mysql = new FactoryMySql();
