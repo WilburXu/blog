@@ -11,7 +11,7 @@
 
 ## 二、类图
 
-![](/images/abstract/1.png)
+![1](/images/abstract_factory/1.png)
 
 ## 三、案例
 
