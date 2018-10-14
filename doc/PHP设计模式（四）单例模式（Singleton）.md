@@ -97,3 +97,23 @@ class DataBase
  
 
  **“对象”?，程序员怎么可能有对象！~**
+
+
+
+## 参考
+
+### 系列源地址
+
+[WilburXu/design_pattern](WilburXu/design_pattern)
+
+### 系列目录
+
+1. [PHP 设计模式概述](https://segmentfault.com/a/1190000016629282)
+
+2. [PHP设计模式（一）简单工厂模式 （Simple Factory For PHP）](https://segmentfault.com/a/1190000016635395)
+
+3. [PHP设计模式（二）工厂方法模式（Factory Method）](https://segmentfault.com/a/1190000016646401)
+
+4. [PHP设计模式（三）抽象工厂模式（Abstract Factory）](https://segmentfault.com/a/1190000016659904)
+
+5. [PHP设计模式（四）单例模式（Singleton）](https://segmentfault.com/a/1190000016670292)
