@@ -11,23 +11,36 @@
 创建型模式是为了解决创建对象时候遇到的问题。因为基本的对象创建方式可能会导致设计上的问题，或增加设计的复杂度，创建型设计模式有两个主导思想：**一是将系统使用的具体类封装起来，二是隐藏这些具体类的实例创建和结合方式。**
 #### 创建型模式主要有以下五种：
 
-1. [简单工厂模式（Simple Factory）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%20%EF%BC%88Simple%20Factory%EF%BC%89.md)
-2. [工厂方法模式（Factory method）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88Factory%20Method%EF%BC%89.md)
-3. [抽象工厂模式（Abstract factory）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88Abstract%20Factory%EF%BC%89.md)
-4. [单例模式（Singleton）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Singleton%EF%BC%89.md)
-5. [建造者模式（Builder）](https://github.com/WilburXu/design_pattern/blob/master/doc/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Builder%EF%BC%89.md)
-6. 原型模式（Prototype） 
+1. [简单工厂模式（Simple Factory）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%20%EF%BC%88Simple%20Factory%EF%BC%89.md)
+
+2. [工厂方法模式（Factory method）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%EF%BC%88Factory%20Method%EF%BC%89.md)
+
+3. [抽象工厂模式（Abstract factory）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%89%EF%BC%89%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%EF%BC%88Abstract%20Factory%EF%BC%89.md)
+
+4. [单例模式（Singleton）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Singleton%EF%BC%89.md)
+
+5. [建造者模式（Builder）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Builder%EF%BC%89.md)
+
+6. [原型模式（Prototype）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AD%EF%BC%89%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%EF%BC%88Prototype%EF%BC%89.md)
+
+   
 
 GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模式（Factory Method）与抽象工厂模式（Abstract Factory）。将简单工厂模式（Simple Factory）看为工厂方法模式的一种特例，两者归为一类。
 
 ### 结构型模式（Structural pattern）
 结构型模式是通过定义一个简单方法来实现和了解实体间关系，从而简化设计。
-  1. 适配器模式（Adapter）
-  2. 桥接模式（Bridge）
+  1. [适配器模式（Adapter）](https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%83%EF%BC%89%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%88Adapter%EF%BC%89.md)
+
+  2. [桥接模式（Bridge）]( https://github.com/WilburXu/blog/blob/master/design-pattern/PHP%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%85%AB%EF%BC%89%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%EF%BC%88Bridge%EF%BC%89.md)
+
   3. 合成模式（Composite）
+
   4. 装饰者模式（Decorator）
+
   5. 表象模式（Facade）
+
   6. 享元模式（Flyweight）
+
   7. 代理模式（Proxy） 
 
 ### 行为型模式（Behavioral pattern）
@@ -48,4 +61,4 @@ GOF在《设计模式》一书中将工厂模式分为两类：工厂方法模�
 ![图片描述][1]
 
 
-[1]: /doc/images/summary/1.png
+[1]:https://rawcdn.githack.com/WilburXu/blog/12a7e13c35897e3a3b8a68362876bdd0e1b2abfc/design-pattern/images/summary/1.png

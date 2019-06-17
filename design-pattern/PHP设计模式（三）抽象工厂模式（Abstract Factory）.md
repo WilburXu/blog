@@ -11,7 +11,7 @@
 
 ## 二、类图
 
-![](https://github.com/WilburXu/design_pattern/blob/master/doc/images/abstract_factory/1.png)
+![](https://rawcdn.githack.com/WilburXu/blog/12a7e13c35897e3a3b8a68362876bdd0e1b2abfc/design-pattern/images/abstract_factory/1.png)
 
 ## 三、案例
 

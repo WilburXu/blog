@@ -2,7 +2,7 @@
 
 适配器模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类可以在一起工作。
 
-![](https://github.com/WilburXu/design_pattern/blob/master/doc/images/adapter/1.png)
+![](https://rawcdn.githack.com/WilburXu/blog/12a7e13c35897e3a3b8a68362876bdd0e1b2abfc/design-pattern/images/adapter/1.png)
 
 
 
