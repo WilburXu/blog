@@ -36,7 +36,7 @@ class AudiA4Product implements AutoProduct
 }
 
 //奔驰C200（具体产品类）
-class BenzC200Product implements AutoProduct
+class B	enzC200Product implements AutoProduct
 {
     //获取汽车名称
     public function dirve()
