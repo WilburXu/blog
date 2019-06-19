@@ -16,7 +16,7 @@
 
 ### 方案二
 
-- 开发者讲代码commit到gitlab上交给运维同学
+- 开发者将代码commit到gitlab上交给运维同学
 - （运维）pull代码
 - （运维）编译成可执行文件
 - （运维）覆盖线上文件
@@ -194,7 +194,9 @@ make build
 
 #### 安装
 
-安装 GitLab Runner 太简单了，按照着 [官方文档](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner) 的教程来就好拉！ 下面是 Debian/Ubuntu/CentOS 的安装方法，其他系统去参考官方文档：
+![](https://rawcdn.githack.com/WilburXu/blog/98380bf89bf578f98ba3222d5868ff52b3ec2442/other/images/gitlab-ci集成_3.png)
+
+安装 GitLab Runner 太简单了，按照着 [官方文档](https://docs.gitlab.com/runner/) 的教程来就好拉！ 下面是 Debian/Ubuntu/CentOS 的安装方法，其他系统去参考官方文档：
 
 ```bash
 # For Debian/Ubuntu
@@ -225,6 +227,8 @@ $ sudo gitlab-runner list
 Listing configured runners          ConfigFile=/etc/gitlab-runner/config.toml
 my-runner                           Executor=shell Token=cd1cd7cf243afb47094677855aacd3 URL=http://mygitlab.com/ci
 ```
+
+
 
 ### .gitlab-ci.yml编写
 
