@@ -196,7 +196,7 @@ make build
 
 ![](https://rawcdn.githack.com/WilburXu/blog/98380bf89bf578f98ba3222d5868ff52b3ec2442/other/images/gitlab-ci集成_3.png)
 
-安装 GitLab Runner 太简单了，按照着 [官方文档](https://docs.gitlab.com/runner/) 的教程来就好拉！ 下面是 Debian/Ubuntu/CentOS 的安装方法，其他系统去参考官方文档：
+安装 GitLab Runner 太简单了，按照着 [官方文档](https://docs.gitlab.com/runner/#install-gitlab-runner) 的教程来就好拉！ 下面是 Debian/Ubuntu/CentOS 的安装方法，其他系统去参考官方文档：
 
 ```bash
 # For Debian/Ubuntu
