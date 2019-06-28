@@ -23,6 +23,12 @@
 
 
 
+## Elastic-佐料铺
+
+1. [Elastic基础入门]([https://github.com/WilburXu/blog/blob/master/ElasticSearch/ElasticSearch%E5%9F%BA%E7%A1%80.md](https://github.com/WilburXu/blog/blob/master/ElasticSearch/ElasticSearch基础.md))
+
+
+
 ## 杂货铺
 
 1. [基于GitLab CI搭建Golang自动构建环境](https://github.com/WilburXu/blog/blob/master/other/%E5%9F%BA%E4%BA%8EGitLab%20CI%E6%90%AD%E5%BB%BAGolang%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83.md)
