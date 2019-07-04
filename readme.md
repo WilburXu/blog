@@ -25,7 +25,7 @@
 
 ## Elastic-佐料铺
 
-1. [Elastic基础 连载一 基础入门](https://github.com/WilburXu/blog/blob/master/ElasticSearch/ElasticSearch%20%E8%BF%9E%E8%BD%BD%E4%B8%80%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8.md)
+1. [ElasticSearch 连载一 基础入门](https://github.com/WilburXu/blog/blob/master/ElasticSearch/ElasticSearch%20%E8%BF%9E%E8%BD%BD%E4%B8%80%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8.md)
 2. [ElasticSearch 连载二 中文分词](https://github.com/WilburXu/blog/blob/master/ElasticSearch/ElasticSearch%20%E8%BF%9E%E8%BD%BD%E4%BA%8C%20%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D.md)
 
 
