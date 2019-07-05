@@ -35,3 +35,9 @@
 
 1. [基于GitLab CI搭建Golang自动构建环境](https://github.com/WilburXu/blog/blob/master/other/%E5%9F%BA%E4%BA%8EGitLab%20CI%E6%90%AD%E5%BB%BAGolang%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83.md)
 
+
+
+## 我有啤酒
+
+1. [2019-07 也无分雨，也无晴](https://github.com/WilburXu/blog/blob/master/life/2019-07%20%E4%B9%9F%E6%97%A0%E9%A3%8E%E9%9B%A8%EF%BC%8C%E4%B9%9F%E6%97%A0%E6%99%B4.md)
+
