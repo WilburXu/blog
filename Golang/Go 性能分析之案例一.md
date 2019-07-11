@@ -51,6 +51,7 @@ func CaseSumTwo(result *int) {
 ```
 
 ### 执行结果
+
 ```
 $ go test -bench=.
 goos: windows
@@ -64,7 +65,13 @@ ok      _/C_/go-code/perform/case-one   14.059s
  - CaseSumTwo执行效率是CaseSumOne的2.94倍，快了近三倍，这是为什么呢？
  - 我想这个其实很容易猜到，这里有一个连续的函数调用“GetDataLen()”,
  我们来看下两个函数的汇编，做个简单的对比：
+### 生成汇编
+```
+go tool compile -S main.go
+```
+
 #### 函数CaseSumOne
+
 ```
 "".CaseSumOne STEXT size=83 args=0x4 locals=0xc
         0x0000 00000 (point.go:22)      TEXT    "".CaseSumOne(SB), $12-4
@@ -166,7 +173,10 @@ func CaseSumThree(result *int) {
 }
 ```
 
+
+
 ### 执行结果
+
 ```
 $ go test -bench=.
 goos: windows
@@ -180,6 +190,11 @@ ok      _/C_/go-code/perform/case-one   8.2773
 ### 问题分析
  - 虽然对连续函数调用进行了优化，但是CaseSumThree对执行效率还是高于CaseSumTwo1.52倍，还有哪些情况会影响执行性能呢？
 我们再来对比下“CaseSumTwo”和“CaseSumThree”对汇编源码：
+
+### 生成汇编
+```
+go tool compile -S main.go
+```
 
 #### 函数CaseSumTwo
 
