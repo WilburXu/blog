@@ -25,7 +25,9 @@
 
 ok，了解完`堆`和`栈`各自的优缺点后，我们就可以更好的知道`逃逸分析`存在的目的了：
 
-1. 
+1. 减少`gc`压力，栈上的变量，随着函数退出后系统直接回收，不需要`gc`标记后再清除。
+2. 减少内存碎片的产生。
+3. 减轻分配堆内存的开销，提高程序的运行速度。
 
 
 
@@ -64,25 +66,55 @@ func GetUserInfo(userInfo UserData) *UserData {
 }
 ```
 
+执行 `go run -gcflags '-m -l' main.go` 后返回以下结果：
+
 ```shell
 # command-line-arguments
 .\main.go:14:9: &userInfo escapes to heap
 .\main.go:13:18: moved to heap: userInfo
 ```
 
-对一个变量取地址，可能会被分配到堆上。但是编译器进行逃逸分析后，如果考察到在函数返回后，此变量不会被引用，那么还是会被分配到栈上。套个取址符，就想骗补助？Too young！
+> GetUserInfo函数里面的变量 `userInfo` 逃到堆上了（分配到堆内存空间上了）。
+>
+> GetUserInfo 函数的返回值为 *UserData 指针类型，然后 将值变量`userInfo` 的地址返回，此时编译器会判断该值可能会在函数外使用，就将其分配到了堆上，所以变量`userInfo`就逃逸了。
+
+#### 优化方案
+
+```go
+func main() {
+	var info UserData
+	info.Name = "WilburXu"
+	_ = GetUserInfo(&info)
+}
+
+func GetUserInfo(userInfo *UserData) *UserData {
+	return userInfo
+}
+```
+
+```shell
+# command-line-arguments
+.\main.go:13:18: leaking param: userInfo to result ~r1 level=0
+.\main.go:10:18: main &info does not escape
+```
+
+对一个变量取地址，可能会被分配到堆上。但是编译器进行逃逸分析后，如果发现到在函数返回后，此变量不会被引用，那么还是会被分配到栈上。套个取址符，就想骗补助？Too young！
 
 
 
-### Case Two
+### 案例二 
 
 
+
+
+
+## 参考文章
+
+[Golang escape analysis](http://www.agardner.me/golang/garbage/collection/gc/escape/analysis/2015/10/18/go-escape-analysis.html)
 
 
 
 ## 总结
-
-
 
 不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
 
