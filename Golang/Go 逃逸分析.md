@@ -98,13 +98,88 @@ func GetUserInfo(userInfo *UserData) *UserData {
 .\main.go:10:18: main &info does not escape
 ```
 
-对一个变量取地址，可能会被分配到堆上。但是编译器进行逃逸分析后，如果发现到在函数返回后，此变量不会被引用，那么还是会被分配到栈上。套个取址符，就想骗补助？Too young！
+对一个变量取地址，可能会被分配到堆上。但是编译器进行逃逸分析后，如果发现到在函数返回后，此变量不会被引用，那么还是会被分配到栈上。套个取址符，就想骗补助？
+
+编译器傲娇的说：Too young，Too Cool...！
 
 
 
-### 案例二 
+### 案例二 ：未确定类型
+
+```go
+package main
+
+type User struct {
+	name interface{}
+}
+
+func main() {
+	name := "WilburXu"
+	MyPrintln(name)
+}
+
+func MyPrintln(one interface{}) (n int, err error) {
+	var userInfo = new(User)
+	userInfo.name = one // 泛型赋值 逃逸咯
+	return
+}
+```
+
+执行 `go run -gcflags '-m -l' main.go` 后返回以下结果：
+
+```shell
+# command-line-arguments
+./main.go:12:16: leaking param: one
+./main.go:13:20: MyPrintln new(User) does not escape
+./main.go:9:11: name escapes to heap
+```
+
+这里可能有同学会好奇，`MyPrintln`函数内并没有被引用的便利，为什么变了`name`会被分配到了`堆`上呢？
+
+上一个案例我们知道了，普通的手法想去"骗取补助"，聪明灵利的编译器是不会“上当受骗的噢”；但是对于`interface`类型，很遗憾，编译器在编译的时候很难知道在函数的调用或者结构体的赋值过程会是怎么类型，因此只能分配到`堆`上。
+
+### 优化方案
+
+将结构体`User`的成员`name`的类型、函数`MyPringLn`参数`one`的类型改为 `string`，将得出：
+
+```shell
+# command-line-arguments
+./main.go:12:16: leaking param: one
+./main.go:13:20: MyPrintln new(User) does not escape
+```
+
+### 拓展分析
+
+对于案例二的分析，我们还可以通过反编译命令`go tool compile -S main.go`查看，会发现如果为`interface`类型，main主函数在编译后会`额外`多出以下指令：
+
+```shell
+# main.go:9 -> MyPrintln(name)
+	0x001d 00029 (main.go:9)	PCDATA	$2, $1
+	0x001d 00029 (main.go:9)	PCDATA	$0, $1
+	0x001d 00029 (main.go:9)	LEAQ	go.string."WilburXu"(SB), AX
+	0x0024 00036 (main.go:9)	PCDATA	$2, $0
+	0x0024 00036 (main.go:9)	MOVQ	AX, ""..autotmp_5+32(SP)
+	0x0029 00041 (main.go:9)	MOVQ	$8, ""..autotmp_5+40(SP)
+	0x0032 00050 (main.go:9)	PCDATA	$2, $1
+	0x0032 00050 (main.go:9)	LEAQ	type.string(SB), AX
+	0x0039 00057 (main.go:9)	PCDATA	$2, $0
+	0x0039 00057 (main.go:9)	MOVQ	AX, (SP)
+	0x003d 00061 (main.go:9)	PCDATA	$2, $1
+	0x003d 00061 (main.go:9)	LEAQ	""..autotmp_5+32(SP), AX
+	0x0042 00066 (main.go:9)	PCDATA	$2, $0
+	0x0042 00066 (main.go:9)	MOVQ	AX, 8(SP)
+	0x0047 00071 (main.go:9)	CALL	runtime.convT2Estring(SB)
+```
+
+对于`Go汇编语法`不熟悉的可以参考 [Golang汇编快速指南](https://studygolang.com/articles/2917)
 
 
+
+## 总结
+
+不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
+
+Go的编译器就如一个聪明的`孩子`一般，大多时候在逃逸分析问题上的处理都令人眼前一亮，但有时`闹性子`的时候处理也是非常粗糙的分析或完全放弃，毕竟这是孩子天性不是吗？ 所以也需要我们在编写代码的时候多多观察，多多留意了。
 
 
 
@@ -113,10 +188,6 @@ func GetUserInfo(userInfo *UserData) *UserData {
 [Golang escape analysis](http://www.agardner.me/golang/garbage/collection/gc/escape/analysis/2015/10/18/go-escape-analysis.html)
 
 
-
-## 总结
-
-不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
 
 
 
