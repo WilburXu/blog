@@ -5,6 +5,7 @@
 ### 零食铺
 
 1. [Go 性能分析之案例一](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B9%8B%E6%A1%88%E4%BE%8B%E4%B8%80.md)
+2. [Go 逃逸分析](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90.md)
 
 
 
