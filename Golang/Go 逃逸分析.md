@@ -267,11 +267,12 @@ Go的编译器就如一个聪明的`孩子`一般，大多时候在逃逸分析�
 
 ## 参考文章
 
-[Golang escape analysis](http://www.agardner.me/golang/garbage/collection/gc/escape/analysis/2015/10/18/go-escape-analysis.html)
+http://www.agardner.me/golang/garbage/collection/gc/escape/analysis/2015/10/18/go-escape-analysis.html
 
+https://segmentfault.com/a/1190000019234268
 
+https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/preview#heading=h.3i6ywlgy4wrw
 
-
-
+http://npat-efault.github.io/programming/2016/10/10/escape-analysis-and-interfaces.html
 
 
