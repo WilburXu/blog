@@ -175,6 +175,88 @@ func MyPrintln(one interface{}) (n int, err error) {
 
 
 
+### 案例三：“点点点”参数逃逸
+
+```go
+package main
+
+func noescape(y ...interface{}){
+}
+
+func main() {
+	x := 0 // BAD: x escapes
+	noescape(&x)
+}
+```
+
+执行 `go run -gcflags '-m -l -l' main.go`   （是两个`-l`噢）后返回以下结果：
+
+```shell
+# command-line-arguments
+.\main.go:3:6: can inline noescape
+.\main.go:6:6: can inline main
+.\main.go:8:10: inlining call to noescape
+.\main.go:3:15: noescape y does not escape
+.\main.go:8:11: &x escapes to heap
+.\main.go:8:11: &x escapes to heap
+.\main.go:7:2: moved to heap: x
+.\main.go:8:10: main []interface {} literal does not escape
+```
+
+先解释一下为什么要使用两个`-l` ，由于当前的场景比较特殊，变量`x`没有被引用，且生命周期也在`main`里，x没有逃逸，分配在栈上，但是我们通过分析，其实发现，如果不在`main`中，那么变量`x`是会逃逸的。这里不得不说，编译器真的太聪明了。
+
+#### 优化方案
+
+`y ...interface{}` 改为 `y interface{}`
+
+
+
+### 案例四：间接赋值（Assignment to indirection escapes）
+
+对某个引用类对象中的引用类成员进行赋值。Go 语言中的引用类数据类型有 `func`, `interface`, `slice`, `map`, `chan`, `*Type(指针)`。
+
+```go
+package main
+
+type User struct {
+	name interface{}
+	age *int
+}
+
+func main() {
+	var (
+		userOne User
+		userTwo = new(User)
+	)
+	userOne.name = "WilburXuOne"	// 不逃逸
+	userTwo.name = "WilburXuTwo"	// 逃逸
+
+	userOne.age = new(int)	// 不逃逸
+	userTwo.age = new(int)	// 逃逸
+}
+```
+
+执行 `go run -gcflags '-m -l' main.go` 后返回以下结果：
+
+```shell
+# command-line-arguments
+.\main.go:14:17: "WilburXuTwo" escapes to heap
+.\main.go:17:19: new(int) escapes to heap
+.\main.go:11:16: main new(User) does not escape
+.\main.go:13:17: main "WilburXuOne" does not escape
+.\main.go:16:19: main new(int) does not escape
+```
+
+为什么这里`值`类型不会逃逸而`引用类型`会逃逸呢？这是因为在 `userTwo = new(User)` 对象的创建时，编译器先是分析`userTwo` 对象可能分配在`堆`上，同时成员变量 `name` 和 `age` 也为`引用类型`，为了保证不出现`栈`回收后，导致对象`userTwo`的成员值也被回收，所以`name`和`age`需要逃逸。
+
+但是，如果`name`和`age`为值类型，那么编译器虽然初步分析`userTwo`会分配在`堆`上，但由于`main`主函数结束后，变量都会被回收，也就是说对象没有被其他引用，那么就都会分配在`栈`上，所以`name`和`age`没有发生逃逸。
+
+#### 优化建议
+
+尽量不要将`引用对象`赋值给`引用对象`。
+
+
+
 ## 总结
 
 不要盲目使用变量的指针作为函数参数，虽然它会减少复制操作。但其实当参数为变量自身的时候，复制是在栈上完成的操作，开销远比变量逃逸后动态地在堆上分配内存少的多。
