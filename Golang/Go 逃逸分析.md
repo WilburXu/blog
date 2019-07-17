@@ -136,7 +136,7 @@ func MyPrintln(one interface{}) (n int, err error) {
 
 这里可能有同学会好奇，`MyPrintln`函数内并没有被引用的便利，为什么变了`name`会被分配到了`堆`上呢？
 
-上一个案例我们知道了，普通的手法想去"骗取补助"，聪明灵利的编译器是不会“上当受骗的噢”；但是对于`interface`类型，很遗憾，编译器在编译的时候很难知道在函数的调用或者结构体的赋值过程会是怎么类型，因此只能分配到`堆`上。
+上一个案例我们知道了，普通的手法想去"骗取补助"，聪明灵利的编译器是不会“上当受骗的噢”；但是对于`interface`类型，很遗憾，go 编译器或者链接器不可能在编译的时候计算两者的对应关系，因此只能分配到`堆`上。
 
 ### 优化方案
 
@@ -175,43 +175,7 @@ func MyPrintln(one interface{}) (n int, err error) {
 
 
 
-### 案例三：“点点点”参数逃逸
-
-```go
-package main
-
-func noescape(y ...interface{}){
-}
-
-func main() {
-	x := 0 // BAD: x escapes
-	noescape(&x)
-}
-```
-
-执行 `go run -gcflags '-m -l -l' main.go`   （是两个`-l`噢）后返回以下结果：
-
-```shell
-# command-line-arguments
-.\main.go:3:6: can inline noescape
-.\main.go:6:6: can inline main
-.\main.go:8:10: inlining call to noescape
-.\main.go:3:15: noescape y does not escape
-.\main.go:8:11: &x escapes to heap
-.\main.go:8:11: &x escapes to heap
-.\main.go:7:2: moved to heap: x
-.\main.go:8:10: main []interface {} literal does not escape
-```
-
-先解释一下为什么要使用两个`-l` ，由于当前的场景比较特殊，变量`x`没有被引用，且生命周期也在`main`里，x没有逃逸，分配在栈上，但是我们通过分析，其实发现，如果不在`main`中，那么变量`x`是会逃逸的。这里不得不说，编译器真的太聪明了。
-
-#### 优化方案
-
-`y ...interface{}` 改为 `y interface{}`
-
-
-
-### 案例四：间接赋值（Assignment to indirection escapes）
+### 案例三：间接赋值（Assignment to indirection escapes）
 
 对某个引用类对象中的引用类成员进行赋值。Go 语言中的引用类数据类型有 `func`, `interface`, `slice`, `map`, `chan`, `*Type(指针)`。
 
