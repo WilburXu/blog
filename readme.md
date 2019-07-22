@@ -33,5 +33,5 @@
 
 ## 我有啤酒
 
-1. [2019-07 也无分雨，也无晴](https://github.com/WilburXu/blog/blob/master/life/2019-07%20%E4%B9%9F%E6%97%A0%E9%A3%8E%E9%9B%A8%EF%BC%8C%E4%B9%9F%E6%97%A0%E6%99%B4.md)
+1. [2019-07 也无风雨，也无晴](https://github.com/WilburXu/blog/blob/master/life/2019-07%20%E4%B9%9F%E6%97%A0%E9%A3%8E%E9%9B%A8%EF%BC%8C%E4%B9%9F%E6%97%A0%E6%99%B4.md)
 
