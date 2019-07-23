@@ -49,49 +49,143 @@
 
 SQL标准制定了四种隔离级别，规定事务的修改对其它事务是否可见
 
-- READ UNCOMMITED 未提交读：未提交也可见，又称**脏读**
+- READ UNCOMMITED（未提交读）：未提交也可见，又称`脏读`
 
-- READ COMMITED 提交读：只有提交才可见，大多数DBMS默认隔离级别都是这个，MySQL不是，也称**不可重复读**
+- READ COMMITED （提交读）：只有提交才可见，大多数DBMS默认隔离级别都是这个，MySQL不是，也称不可重复读
 
-- REPEATABLE READ 可重复读，多次重复读取结果一致，MySQL默认这个级别，解决**脏读**问题，但存在**幻读**问题（某个事务读取记录时，另一事务插入了新纪录，原事务再读取记录时产生幻行），InnoDB/XtraDB通过多版本并发控制MVCC解决幻读问题
+- REPEATABLE READ （可重复读），多次重复读取结果一致，MySQL默认这个级别，解决`脏读`问题，但存在`幻读`问题（某个事务读取记录时，另一事务插入了新纪录，原事务再读取记录时产生幻行）。
 
-- SERIALIZABLE 可串行化，最高隔离级别，强制事务串行执行，完全没有并发性能
+- SERIALIZABLE （可串行化），最高隔离级别，强制事务串行执行，避免了前面说的幻读问题，并发性能差
 
-
-
-
+| 隔离级别        | 脏读可能性 | 不可重复读可能性 | 幻读可能性 | 加锁读 |
+| --------------- | ---------- | ---------------- | ---------- | ------ |
+| READ UNCOMMITED | Yes        | Yes              | Yes        | No     |
+| READ COMMITED   | No         | Yes              | Yes        | No     |
+| REPEATABLE READ | No         | No               | Yes        | No     |
+| SERIALIZABLE    | No         | No               | No         | Yes    |
 
 
 
 ## 死锁的定义
 
+死锁是指`两个或多个事务`在同一资源上相互占用，并请求`锁定`对方占用的资源（我等待你的资源，你却等待我的资源，我们都相互等待，谁也不释放自己占有的资源），从而导致恶性循环的现象：
 
-
-
-
-
-
-
+- 当多个`事务`试图以不同顺序锁定资源时，就可能会产生死锁
+- 多个`事务`，同时`锁定`同一个资源时，也会产生死锁
 
 
 
 ## 死锁的危害
 
+死等和死锁可不是一回事，如果你遇到了死等，大可放心，肯定不是死锁；如果发生了死锁，也大可放心，绝对不会死等。
+
+这是因为`MySQL`内部有一套死锁检测机制，一旦发生死锁会立即回滚一个事务，让另一个事务执行下去。并且这个死锁回滚的的错误消息也会发送给客户端。即使正常的业务中，死锁也时不时会发生，所以遇到死锁不要害怕，因为这也是对数据安全的一种保护，但是若死锁太频繁，那可能会带来许多的问题：
+
+1. 使进程得不到正确的结果：处于死锁状态的进程得不到所需的资源，不能向前推进，故得不到结果
+
+2. 使资源的利用率降低：处于死锁状态的进程不释放已占有的资源，以至于这些资源不能被其他进程利用，故系统资源利用率降低
+
+3. 导致产生新的死锁：其它进程因请求不到死锁进程已占用的资源而无法向前推进，所以也会发生死锁
+
 
 
 ## 死锁产生的原因
 
+死锁有四个必要的条件：
 
+1. 互斥排他：一个资源每次只能被一个进程使用
+2. 保持着排他资源又提出新资源请求：一个进程因请求资源而阻塞时，对已获得的资源保持不放
+3. 不可剥夺：资源不能被抢占，即资源只能在进程完成任务后自动释放
+4. 环路：有一组等待进程｛P0、P1、P2｝，`P0`等待的资源被`P1`所占有，`P1`等待的资源被`P2`所占有，而`P2`等待的又被`P0`所占有，形成了一个等待循环
 
 
 
 ## 死锁的发生场景
 
-### 场景一
+以下的所有场景是基于 `InnoDB存储引擎`并且隔离级别为`REPEATABLE-READ`（可重复读）
+
+**查询当前的隔离级别：**
+
+```mysql
+select @@global.tx_isolation,@@tx_isolation;
+```
+
+```mysql
++-----------------------+-----------------+
+| @@global.tx_isolation | @@tx_isolation  |
++-----------------------+-----------------+
+| REPEATABLE-READ       | REPEATABLE-READ |
++-----------------------+-----------------+
+```
+
+**修改隔离级别：**
+
+```mysql
+set global transaction isolation level read committed; ## 全局的
+
+set session transaction isolation level read committed; ## 当前会话(session)
+```
+
+**创建数据表**
+
+```mysql
+CREATE TABLE `deadlock` (
+  `id` int(11) NOT NULL,
+  `stu_num` int(11) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_uniq_stu_num` (`stu_num`),
+  KEY `idx_score` (`score`)
+) ENGINE=InnoDB;
+
+insert into deadlock(id, stu_num, score) values (1, 11, 111);
+insert into deadlock(id, stu_num, score) values (2, 22, 222);
+insert into deadlock(id, stu_num, score) values (3, 33, 333);
+```
+
+`id`主键索引
+
+`stu_num` 为唯一索引
+
+`score`普通索引
 
 
 
-### 场景二
+为了模拟实际场景，需要在每个会话（session）中执行以下两条命令：
+
+```mysql
+set autocommit=0; ## 关闭自动提交
+
+START TRANSACTION; ## 开始事务
+```
+
+
+
+### 场景一：AB BA
+
+```mysql
+# session A
+select * from deadlock where id = 1 for update; 
+
+# session B
+select * from deadlock where id = 2 for update; 
+
+# session A
+select * from deadlock where id = 2 for update;
+## 因为session2 已经给id=2分配了写锁
+
+# session B
+select * from deadlock where id = 1 for update;
+## 1213 - Deadlock found when trying to get lock; try restarting transaction
+```
+
+死锁路径：【session A --> session B --> session B --> session A】
+
+
+
+### 场景二：
+
+
 
 
 
@@ -99,36 +193,31 @@ SQL标准制定了四种隔离级别，规定事务的修改对其它事务是�
 
 ### 预防死锁
 
+1. 同顺序：以固定的顺序访问表和行。比如两个更新数据的事务，事务A 更新数据的顺序 为1->2；事务B更新数据的顺序为2->1。这样更可能会造成死锁
 
-
-### 避免死锁
+- 尽量保持事务简短：大事务更倾向于死锁，如果业务允许，将大事务拆小
+- 一次性锁定：在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁概率
+- 降低隔离级别：如果业务允许，将隔离级别调低也是较好的选择，比如将隔离级别从RR调整为RC，可以避免掉很多因为gap锁造成的死锁
+- 细粒度锁定（行锁）：为表添加合理的索引。可以看到如果不走索引将会为表的每一行记录添加上锁，死锁的概率大大增大
 
 
 
 ### 死锁的检测和解除
 
+**innodb_lock_wait_timeout 等待锁超时回滚事务：** 
+直观方法是在两个事务相互等待时，当一个等待时间超过设置的某一阀值时，对其中一个事务进行回滚，另一个事务就能继续执行。这种方法简单有效，在innodb中，参数innodb_lock_wait_timeout用来设置超时时间。
 
+**wait-for graph算法来主动进行死锁检测：** 
+innodb还提供了wait-for graph算法来主动进行死锁检测，每当加锁请求无法立即满足需要并进入等待时，wait-for graph算法都会被触发。
 
 ## 参考文章
 
 《高性能的MySQL 第三版》
 
-
+http://hedengcheng.com/?p=771#_Toc374698322
 
 https://www.kancloud.cn/hanghanghang/os/239542#_38
 
+https://blog.csdn.net/dqjyong/article/details/8046397
 
 
-
-
-
-
-## 
-
-
-
-https://my.oschina.net/u/1399755/blog/1788881
-
-
-
-[https://benjaminwhx.com/2018/02/28/%E7%94%B1%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E9%97%AE%E9%A2%98%E5%B8%A6%E6%9D%A5%E7%9A%84MySQL%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/](https://benjaminwhx.com/2018/02/28/由一次线上问题带来的MySQL死锁问题分析/)
