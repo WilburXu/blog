@@ -183,7 +183,54 @@ select * from deadlock where id = 1 for update;
 
 
 
-### 场景二：
+### 场景二：同一个事务中，S-lock 升级为 X-lock
+
+```mysql
+# session A
+SELECT * FROM deadlock WHERE id = 1 LOCK IN SHARE MODE;   
+## 获取S-Lock
+
+# session B
+DELETE FROM deadlock WHERE id = 1;   
+## 想获取X-Lock，但被session A的S-lock 卡住，目前处于waiting lock阶段
+
+# session A
+DELETE FROM deadlock WHERE id = 1;   
+## Error : Deadlock found when trying to get lock; try restarting transaction
+## 想获取X-Lock，sessionA本身拥有S-Lock
+## 但是由于sessionB 申请X-Lock再前##
+## 因此sessionA不能够从S-lock 提升到 X-lock
+## 需要等待sessionB 释放才可以获取，所以造成死锁
+
+```
+
+死锁路径：sessionB --> sessionA , sessionA --> sessionB
+
+
+
+### 场景三：唯一键死锁
+
+```mysql
+CREATE TABLE `deadlock_two` (
+  `stu_num` int(11) DEFAULT NULL,
+  UNIQUE KEY `idx_uniq_stu_num` (`stu_num`)
+) ENGINE=InnoDB;
+
+insert into deadlock_two(stu_num) values (11);
+```
+
+```mysql
+# session A
+delete from deadlock_two where stu_num=11;
+
+# session B
+insert into deadlock_two values(11);
+
+# session C
+insert into deadlock_two values(11);
+```
+
+
 
 
 
