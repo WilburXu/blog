@@ -179,8 +179,6 @@ select * from deadlock where id = 1 for update;
 ## 1213 - Deadlock found when trying to get lock; try restarting transaction
 ```
 
-死锁路径：【session A --> session B --> session B --> session A】
-
 
 
 ### 场景二：同一个事务中，S-lock 升级为 X-lock
@@ -204,33 +202,46 @@ DELETE FROM deadlock WHERE id = 1;
 
 ```
 
-死锁路径：sessionB --> sessionA , sessionA --> sessionB
 
 
-
-### 场景三：唯一键死锁
+### 场景三：主键和二级索引的死锁
 
 ```mysql
-CREATE TABLE `deadlock_two` (
+CREATE TABLE `deadlock_A` (
+  `id` int(11) NOT NULL,
   `stu_num` int(11) DEFAULT NULL,
-  UNIQUE KEY `idx_uniq_stu_num` (`stu_num`)
+  `score` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_score` (`score`),
+  KEY `idx_stu_num` (`stu_num`) USING BTREE
 ) ENGINE=InnoDB;
 
-insert into deadlock_two(stu_num) values (11);
+# deadlock_A 数据
+# select * from deadlock_A
+| id   | stu_num | score |
+| ---- | ------- | ----- |
+| 1    | 11      | 111   |
+| 2    | 33      | 222   |
+| 3    | 22      | 333   |
+| 4    | 44      | 444   |
 ```
+
+
 
 ```mysql
 # session A
-delete from deadlock_two where stu_num=11;
+delete from deadlock_A where stu_num > 11;
+## 锁二级索引（stu_num）的顺序：22->33->44  锁主键（id）索引的顺序：3->2->4
 
 # session B
-insert into deadlock_two values(11);
+delete from deadlock_A where score > 111;
+## 锁二级索引（score）的顺序：222->333->444  锁主键（id）索引的顺序：2->3->4
 
-# session C
-insert into deadlock_two values(11);
+## sessionA锁主键3， sessionB锁主键2
+## sessionA锁主键2， sessionB锁主键3
+## 死锁产生-》AB BA
+## 这个在并发场景，可能会产生。
 ```
-
-
 
 
 
