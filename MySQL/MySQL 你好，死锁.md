@@ -245,6 +245,27 @@ delete from deadlock_A where score > 111;
 
 
 
+### 场景四：间隙锁（Gap Lock）
+
+```mysql
+CREATE TABLE `t2` (
+  `id` int(11) NOT NULL,
+  `v` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idxa` (`v`)
+) ENGINE=InnoDB;
+
+# select * from t2
+| id   | v  	 |
+| ---- | ----- |
+| 2    | 2     |
+| 5    | 5     |
+| 10   | 10    |
+
+```
+
+
+
 
 
 ## 死锁的处理策略
