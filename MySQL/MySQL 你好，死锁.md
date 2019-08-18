@@ -252,7 +252,7 @@ CREATE TABLE `t2` (
   `id` int(11) NOT NULL,
   `v` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idxa` (`v`)
+  KEY `idx_v` (`v`) USING BTREE
 ) ENGINE=InnoDB;
 
 # select * from t2
@@ -264,7 +264,54 @@ CREATE TABLE `t2` (
 
 ```
 
+#### 间隙锁案例
 
+```mysql
+# session A
+delete from test where v=5;
+
+# session B
+insert into t2 (id,v) values (3,3);
+## ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+
+insert into t2 (id,v) values (9,9);
+## ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+
+insert into t2 (id,v) values (5,11);
+## ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
+
+insert into t2 (id,v) values (1,1)
+## Affected rows : 1, Time: 5.62sec
+
+insert into t2(id,v) values (10, 10);
+## Affected rows : 1, Time: 10.51sec
+
+insert into t2 (id,v) values (9,11);
+## Affected rows : 1, Time: 15.51sec
+```
+
+看得出锁的是 id=5 & k=[3,10)的记录。
+
+通过上面案例，大概了解间隙锁的范围后，我们来看看死锁场景：
+
+```mysql
+# session A
+update t2 set v = 5 where v =5;
+## Affected rows : 1, Time: 12.67sec
+
+# session B
+update t2 set v = 10 where v =10;
+## Affected rows : 1, Time: 12.88sec
+
+# session A
+insert into t2 (id,v) values (7,7);
+## waiting
+
+# session B
+insert into t2 (id,v) values (8,8);
+## Error : Deadlock found when trying to get lock; try restarting transaction
+
+```
 
 
 
