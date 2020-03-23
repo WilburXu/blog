@@ -1,6 +1,6 @@
 # 令牌桶限频（Rate Limiter）
 
-![](https://rawcdn.githack.com/WilburXu/blog/cbd76768c8af1626b4f55468658a8559ff26129e/other/images/token_buckets-1.jpg)
+![](https://rawcdn.githack.com/WilburXu/blog/29e69ece7c018af808bb09237bea7181905e2325/other/images/token_buckets-1.jpg)
 
 
 
