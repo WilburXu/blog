@@ -9,6 +9,7 @@
 
 ## MySQL-酒窖
 1. [MySQL 你好，死锁](https://github.com/WilburXu/blog/blob/master/MySQL/MySQL%20%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%AD%BB%E9%94%81.md)
+2. [MySQL ERROR 1040](https://github.com/WilburXu/blog/blob/master/MySQL/MySQL%20ERROR%201040.md)
 
 ## Elastic-佐料铺
 
