@@ -6,6 +6,7 @@
 
 1. [Go 性能分析之案例一](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B9%8B%E6%A1%88%E4%BE%8B%E4%B8%80.md)
 2. [Go 逃逸分析](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90.md)
+3. [Go 平滑重启](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E5%B9%B3%E6%BB%91%E9%87%8D%E5%90%AF.md)
 
 ## MySQL-酒窖
 1. [MySQL 你好，死锁](https://github.com/WilburXu/blog/blob/master/MySQL/MySQL%20%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%AD%BB%E9%94%81.md)
