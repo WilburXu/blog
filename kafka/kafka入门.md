@@ -43,15 +43,13 @@ Kafka 体系架构包括若干 Producer、若干 Broker、若干Consumer:
 
 #### topic消费情况
 
-kafka-run-class.sh kafka.tools.ConsumerOffsetChecker
-
 ##### topic offset 最小
 
-`kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic [topic] --time -2`
+`kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic [topic_name] --time -2`
 
 ##### topic offset最大
 
-`kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic [topic] --time -1`
+`kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic [topic_name] --time -1`
 
 
 
@@ -59,9 +57,23 @@ kafka-run-class.sh kafka.tools.ConsumerOffsetChecker
 
 ##### 添加数据
 
-`kafka-console-producer.sh --broker-list localhost:9092 --topic [topic]`
+`kafka-console-producer.sh --broker-list localhost:9092 --topic [topic_name]`
 
 ### 消费
 
-`kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic] --from-beginning`
+##### 从头部开始消费
+
+`kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --from-beginning`
+
+##### 从尾部开始消费，必需要指定分区
+
+`kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset latest --partition 0`
+
+##### 从某个位置开始消费(--offset [n])
+
+`kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset 100 --partition 0`
+
+##### 消费指定个数(--max-messages [n])
+
+`kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset latest --partition 0 --max-messages 2`
 
