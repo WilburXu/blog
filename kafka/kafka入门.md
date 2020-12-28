@@ -19,6 +19,23 @@ Kafka 体系架构包括若干 Producer、若干 Broker、若干Consumer:
 3. 发送消息
 4. 关闭生产者实例
 
+## 查看所有Broker
+
+### zookeeper
+
+broker节点保存在zookeeper，所有需要：
+
+1. 进入zookeeper，然后 `./bin/zkCli.sh`
+
+2. 执行`ls /brokers/ids`
+
+### 查看broker详情
+
+`kafka-log-dirs.sh --describe --bootstrap-server kafka:9092 --broker-list 1`
+
+
+
+
 ## kafka 命令
 
 ### topic
@@ -76,4 +93,34 @@ Kafka 体系架构包括若干 Producer、若干 Broker、若干Consumer:
 ##### 消费指定个数(--max-messages [n])
 
 `kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset latest --partition 0 --max-messages 2`
+
+
+
+### 消费组
+
+##### 查看消费组列表
+
+`kafka-consumer-groups.sh  --list --bootstrap-server localhost:9092`
+
+##### 查看消费组情况
+
+`kafka-consumer-groups.sh --bootstrap-server kafka:9092 --describe --group [group_id]`
+
+##### offset 偏移设置为最早
+
+`kafka-consumer-groups.bat --bootstrap-server kafka:9092 --group kafka_consumer_session --reset-offsets --to-earliest --all-topics --execute`
+
+##### offset 偏移设置为新
+
+`kafka-consumer-groups.bat --bootstrap-server kafka:9092 --group kafka_consumer_session --reset-offsets --to-latest --all-topics --execute`
+
+##### offset 偏移设置为指定位置
+
+`kafka-consumer-groups.bat --bootstrap-server kafka:9092 --group kafka_consumer_session --reset-offsets --to-offset 2000 --all-topics --execute`
+
+##### offset 偏移设置某个时间之后最早位移
+
+`kafka-consumer-groups.bat --bootstrap-server kafka:9092 --group kafka_consumer_session --reset-offsets --to-datetime 2020-12-26T00:00:00.000 --all-topics --execute`
+
+
 
