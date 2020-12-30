@@ -1,7 +1,7 @@
 # Kafka基本架构和命令
 
 ## Kafka体系架构
-<img src="images/1-1.png" alt="1-1" style="zoom:50%;" />
+<img src="images/1-1.png" alt="1-1" width="600px"  />
 
 ### Broker服务代理节点
 
@@ -11,7 +11,7 @@
 
 生产者，也就是发送消息的一方。生产者负责创建消息，然后将其投递到Kafka中。
 
-<img src="images/1-2.png" alt="1-2" style="zoom:50%;" />
+<img src="images/1-2.png" alt="1-2" width="600px"  />
 
 一个正常的生产逻辑需要具备以下几个步骤：
 
