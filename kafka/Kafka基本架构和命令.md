@@ -143,6 +143,8 @@ broker节点保存在zookeeper，所有需要：
 
 `kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset 100 --partition 0`
 
+
+
 ##### 消费指定个数(--max-messages [n])
 
 `kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic [topic_name] --offset latest --partition 0 --max-messages 2`
@@ -181,7 +183,7 @@ broker节点保存在zookeeper，所有需要：
 
 基于`https://github.com/Shopify/sarama`的生产和消费案例
 
-###生产者
+### 生产者
 
 `InitKafka.go` 
 
