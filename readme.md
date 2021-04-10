@@ -41,4 +41,5 @@
 ## 我有啤酒
 
 1. [2019-07 也无风雨，也无晴](https://github.com/WilburXu/blog/blob/master/life/2019-07%20%E4%B9%9F%E6%97%A0%E9%A3%8E%E9%9B%A8%EF%BC%8C%E4%B9%9F%E6%97%A0%E6%99%B4.md)
+2. [2021-04 巨人完结撒花啦](https://github.com/WilburXu/blog/blob/master/life/2021-04%20%E5%B7%A8%E4%BA%BA%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E5%95%A6.md)
 
