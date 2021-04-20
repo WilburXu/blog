@@ -47,7 +47,7 @@ typora-copy-images-to: ./images/
 
 jetbrains的“EmmyLua”插件  + mobdebug库
 
-![image-20210420150127368](/images//image-20210420150127368.png)
+![image-20210420150127368](./images//image-20210420150127368.png)
 
 
 
