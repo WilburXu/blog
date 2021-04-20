@@ -1,6 +1,6 @@
 ---
-typora-root-url: ./images
-typora-copy-images-to: ./images
+typora-root-url: ./
+typora-copy-images-to: ./
 ---
 
 # lua远程调试 Remote Debug
@@ -11,17 +11,17 @@ typora-copy-images-to: ./images
 
 这样：
 
-![](/remote-01.png)
+![](./images/remote-01.png)
 
 
 
 然后这样：
 
-![](/remote-02.jpg)
+![](./images/remote-02.jpg)
 
 
 
 最后就：
 
-![](/image-20210420102007629.png)
+![](./images/image-20210420102007629.png)
 
