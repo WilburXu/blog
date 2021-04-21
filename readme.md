@@ -25,9 +25,10 @@
 3. [Python+Scrapy+Selenium数据采集](https://github.com/WilburXu/blog/blob/master/other/Scrapy%2BSelenium%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86.md)
 4. [Kafka基本架构、命令、案例](https://github.com/WilburXu/blog/blob/master/kafka/Kafka%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%92%8C%E5%91%BD%E4%BB%A4.md)
 
-## Lua
+## Nginx
 
-1. [Lua Remote Debug 远程调试](https://github.com/WilburXu/blog/blob/master/lua/remote%20debug%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95.md)
+1. [Lua Remote Debug 远程调试](https://github.com/WilburXu/blog/blob/master/nginx/remote%20debug%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95.md)
+2. [Lua OpenResty容器化（考古历程）](https://github.com/WilburXu/blog/blob/master/nginx/Lua%20OpenResty%E5%AE%B9%E5%99%A8%E5%8C%96%EF%BC%88%E8%80%83%E5%8F%A4%E5%8E%86%E7%A8%8B%EF%BC%89.md)
 
 
 ## 设计模式
