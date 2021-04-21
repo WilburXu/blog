@@ -1,6 +1,6 @@
 ---
 typora-copy-images-to: ./images
-typora-root-url: ../lua
+typora-root-url: ../nginx
 ---
 
 # Lua OpenResty容器化（考古历程）
