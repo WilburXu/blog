@@ -24,6 +24,7 @@
 2. [令牌桶限频（Token Bucket）](https://github.com/WilburXu/blog/blob/master/other/%E4%BB%A4%E7%89%8C%E6%A1%B6%E9%99%90%E9%A2%91%EF%BC%88Rate%20Limiter%EF%BC%89.md)
 3. [Python+Scrapy+Selenium数据采集](https://github.com/WilburXu/blog/blob/master/other/Scrapy%2BSelenium%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86.md)
 4. [Kafka基本架构、命令、案例](https://github.com/WilburXu/blog/blob/master/kafka/Kafka%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84%E5%92%8C%E5%91%BD%E4%BB%A4.md)
+5. [LDAP概念和原理介绍](https://github.com/WilburXu/blog/blob/master/other/LDAP%E6%A6%82%E5%BF%B5%E5%92%8C%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D.md)
 
 ## Nginx
 
