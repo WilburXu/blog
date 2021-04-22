@@ -69,7 +69,7 @@ LDAP是开放的Internet标准，支持跨平台的Internet协议，在业界中
 
 
 
-<img src="./images/image-20210422101640578.png" alt="yapi" style="zoom:50%;" />
+<img src="./images/image-20210422101640578.png" alt="yapi" width="70%;" />
 
 是不是很方便呢？
 
@@ -127,27 +127,27 @@ LDAP是开放的Internet标准，支持跨平台的Internet协议，在业界中
 
 #### 1. 信息模型
 
-<img src="./images/image-20210422102117948.png" alt="image-20210422102117948" style="zoom:50%;" />
+<img src="./images/image-20210422102117948.png" alt="image-20210422102117948" width="70%;" />
 
 #### 2. 命名模型
 
-<img src="./images/image-20210422102203036.png" alt="image-20210422102203036" style="zoom:50%;" />
+<img src="./images/image-20210422102203036.png" alt="image-20210422102203036" width="70%;" />
 
 #### 3. 功能模型
 
-<img src="./images/image-20210422102236623.png" alt="image-20210422102236623" style="zoom:50%;" />
+<img src="./images/image-20210422102236623.png" alt="image-20210422102236623" width="70%;" />
 
 
 
 #### 4.  安全模型
 
-<img src="./images/image-20210422102338251.png" alt="image-20210422102338251" style="zoom:50%;" />
+<img src="./images/image-20210422102338251.png" alt="image-20210422102338251" width="70%;" />
 
 ## 四、LDAP的使用
 
 　　那我们是如何访问LDAP的数据库服务器呢？
 
-<img src="./images/image-20210422102418794.png" alt="image-20210422102418794" style="zoom:50%;" />
+<img src="./images/image-20210422102418794.png" alt="image-20210422102418794" width="70%;" />
 
 
 
