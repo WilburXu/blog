@@ -30,6 +30,8 @@
 
 1. [Lua Remote Debug 远程调试](https://github.com/WilburXu/blog/blob/master/nginx/remote%20debug%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95.md)
 2. [Lua OpenResty容器化（考古历程）](https://github.com/WilburXu/blog/blob/master/nginx/Lua%20OpenResty%E5%AE%B9%E5%99%A8%E5%8C%96%EF%BC%88%E8%80%83%E5%8F%A4%E5%8E%86%E7%A8%8B%EF%BC%89.md)
+3. [nginx mirror 流量复制的心路历程](https://github.com/WilburXu/blog/blob/master/nginx/nginx%20mirror%20%E6%B5%81%E9%87%8F%E5%A4%8D%E5%88%B6%E7%9A%84%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B.md)
+4. [难受，nginx worker进程内存持续飘升！](https://github.com/WilburXu/blog/blob/master/nginx/%E9%9A%BE%E5%8F%97%EF%BC%8Cnginx%20worker%E8%BF%9B%E7%A8%8B%E5%86%85%E5%AD%98%E6%8C%81%E7%BB%AD%E9%A3%98%E5%8D%87%EF%BC%81.md)
 
 
 ## 设计模式
