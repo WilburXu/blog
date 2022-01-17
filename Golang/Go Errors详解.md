@@ -262,3 +262,5 @@ https://github.com/golang/go/labels/LanguageChange
 https://github.com/pkg/errors
 
 https://go.googlesource.com/proposal/+/master/design/go2draft-error-values-overview.md
+
+https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling.md
