@@ -8,6 +8,7 @@
 2. [Go 逃逸分析](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90.md)
 3. [Go 平滑重启](https://github.com/WilburXu/blog/blob/master/Golang/Go%20%E5%B9%B3%E6%BB%91%E9%87%8D%E5%90%AF.md)
 4. [Go Errors 详解](https://github.com/WilburXu/blog/blob/master/Golang/Go%20Errors%E8%AF%A6%E8%A7%A3.md)
+5. [Go Exec 僵尸与孤儿进程](https://github.com/WilburXu/blog/blob/master/Golang/Go%20Exec%20%E5%83%B5%E5%B0%B8%E4%B8%8E%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B.md)
 
 ## MySQL-酒窖
 1. [MySQL 你好，死锁](https://github.com/WilburXu/blog/blob/master/MySQL/MySQL%20%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%AD%BB%E9%94%81.md)
